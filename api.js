@@ -48,15 +48,15 @@ api.post('/hello', (req, res, next) => {
 
     res.send("백석대학교 : " + pId + name + num);
 });
-
+/*
 api.post('/insSensor', (req, res, next) => {
 
     var sensorType = req.body.sensorType;// "";
     var sensorValue = req.body.sensorValue;//"";
     var userId = req.body.userId; //"";
 
-    var sql = "insert into sensor_data(sensor_type, sensor_value, sensor_usr_id, ins_date, upd_date) values ";
-    sql += " ('"+ sensorType +"', "+ sensorValue +", '"+ userId +"', now() , now()) ";
+    var sql = "insert into sensor_data(sensor_type, sensor_value, sensor_usr_id, ins_date) values ";
+    sql += " ('"+ sensorType +"', "+ sensorValue +", '"+ userId +"', now() )";
     console.log(sql);
 
     console.log("init start");
@@ -66,11 +66,48 @@ api.post('/insSensor', (req, res, next) => {
         res.send(results);
     })
 
+
     //req.body.sensorIdx
     //req.body.sensorType
     //req.body.sensorValue
 
 });
+*/
+
+api.get('/insSensor', (req, res, next) => {
+
+    let sensor_data = {
+            sensorType : "0",
+            sensorValue : 'test',
+            userId : '20152829'
+    }
+   
+    if(req.query.sensorType !== null && req.query.sensorType !== undefined){
+        sensor_data.sensorType = req.query.sensorType;
+    }
+    if(req.query.sensorValue !== null && req.query.sensorValue !== undefined){
+        sensor_data.sensorValue = req.query.sensorValue;
+    }
+    if(req.query.userId !== null && req.query.userId !== undefined){
+        sensor_data.userId = req.query.userId;
+    }
+
+    var sql = "insert into sensor_data(sensor_type, sensor_value, sensor_user, ins_date) values ";
+    sql += " ('"+ sensor_data.sensorType +"', "+ sensor_data.sensorValue +", '"+ sensor_data.userId +"', now() )";
+    console.log(sql);
+
+    console.log("init start");
+    DB.query(sql , function(error, results, fields){
+        console.log(error);
+        console.log(results);
+        res.send(results);
+    })
+    //req.body.sensorIdx
+    //req.body.sensorType
+    //req.body.sensorValue
+});
+
+
 //Query String
 // ex) http://localhost/api/echo?param1=123&param2=321
 api.get('/query_echo', (req, res, next) => {
