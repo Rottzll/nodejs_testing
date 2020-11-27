@@ -102,9 +102,6 @@ api.get('/insSensor', (req, res, next) => {
         console.log(results);
         res.send(results);
     })
-    //req.body.sensorIdx
-    //req.body.sensorType
-    //req.body.sensorValue
 });
 
 
