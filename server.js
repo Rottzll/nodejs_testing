@@ -18,12 +18,15 @@ server.use(express.urlencoded({ extended: false }));
 server.use(express.static(path.join(__dirname, '/web')));
 
 
+
 /************* Routing **************/
 
 //intro
 server.get('/', (req, res, next) => {
     res.render("index.html");
 });
+
+
 
 //Quary String에 대하여 알아보자
 server.get('/study', (req, res, next) => {

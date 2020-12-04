@@ -7,6 +7,8 @@ var DB   = require('./DB');
 var api  = express();
 
 
+api.use(express.static(__dirname + '/node_modules/startbootstrap-sb-admin-2'));
+
 /************* Routing **************/
 //api Index
 api.get('/sensor', (req, res, next) => {
@@ -73,6 +75,9 @@ api.post('/insSensor', (req, res, next) => {
 
 });
 */
+
+/* bootstarap */
+
 
 api.get('/insSensor', (req, res, next) => {
 
