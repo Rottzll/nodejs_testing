@@ -50,14 +50,14 @@ api.post('/hello', (req, res, next) => {
 
     res.send("백석대학교 : " + pId + name + num);
 });
-/*
+
 api.post('/insSensor', (req, res, next) => {
 
     var sensorType = req.body.sensorType;// "";
     var sensorValue = req.body.sensorValue;//"";
     var userId = req.body.userId; //"";
 
-    var sql = "insert into sensor_data(sensor_type, sensor_value, sensor_usr_id, ins_date) values ";
+    var sql = "insert into sensor_data(sensor_type, sensor_value, sensor_user, ins_date) values ";
     sql += " ('"+ sensorType +"', "+ sensorValue +", '"+ userId +"', now() )";
     console.log(sql);
 
@@ -74,33 +74,41 @@ api.post('/insSensor', (req, res, next) => {
     //req.body.sensorValue
 
 });
-*/
+
 
 /* bootstarap */
 
 
 api.get('/insSensor', (req, res, next) => {
-
-    let sensor_data = {
-            sensorType : "0",
-            sensorValue : 'test',
-            userId : '20152829'
-    }
+    
+    // let sensor_data = {
+    //         sensorType : "0",
+    //         sensorValue : 20,
+    //         userId : '20152829'
+    // }
    
-    if(req.query.sensorType !== null && req.query.sensorType !== undefined){
-        sensor_data.sensorType = req.query.sensorType;
-    }
-    if(req.query.sensorValue !== null && req.query.sensorValue !== undefined){
-        sensor_data.sensorValue = req.query.sensorValue;
-    }
-    if(req.query.userId !== null && req.query.userId !== undefined){
-        sensor_data.userId = req.query.userId;
-    }
+    // if(req.query.sensorType !== null && req.query.sensorType !== undefined){
+    //     sensor_data.sensorType = req.query.sensorType;
+    // }
+    // if(req.query.sensorValue !== null && req.query.sensorValue !== undefined){
+    //     sensor_data.sensorValue = req.query.sensorValue;
+    // }
+    // if(req.query.userId !== null && req.query.userId !== undefined){
+    //     sensor_data.userId = req.query.userId;
+    // }
+    // var sql = "insert into sensor_data(sensor_type, sensor_value, sensor_user, ins_date) values ";
+    // sql += " ('"+ sensor_data.sensorType +"', "+ sensor_data.sensorValue +", '"+ sensor_data.userId +"', now() )";
+    // console.log(sql);
+    
+
+    var sensorType = req.query.sensorType;// "";
+    var sensorValue = req.query.sensorValue;//"";
+    var userId = req.query.userId; //"";
 
     var sql = "insert into sensor_data(sensor_type, sensor_value, sensor_user, ins_date) values ";
-    sql += " ('"+ sensor_data.sensorType +"', "+ sensor_data.sensorValue +", '"+ sensor_data.userId +"', now() )";
+    sql += " ('"+ sensorType +"', "+ sensorValue +", '"+ userId +"', now() )";
     console.log(sql);
-
+    
     console.log("init start");
     DB.query(sql , function(error, results, fields){
         console.log(error);
@@ -108,6 +116,7 @@ api.get('/insSensor', (req, res, next) => {
         res.send(results);
     })
 });
+
 
 
 //Query String
